@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Flaming Grill — Indian Fusion</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #c0391b;
+    --orange: #e05a1a;
+    --gold: #d4961a;
+    --dark: #1a0800;
+    --deep: #2d1000;
+  }
+
+  html { scroll-behavior: smooth; }
+  body { font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+
+  /* ── PAGE 1: HERO ── */
+  .page-hero {
+    min-height: 100vh;
+    background: radial-gradient(ellipse 70% 90% at 65% 50%, #5a1800 0%, #2d1000 45%, #1a0800 100%);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Flame line decorations */
+  .flame-deco {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 52%;
+    pointer-events: none;
+    opacity: 0.09;
+  }
+  .flame-deco svg { width: 100%; height: 100%; }
+
+  /* Nav */
+  .hero-nav {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.4rem 2.5rem;
+    border-bottom: 1px solid rgba(212,150,26,0.2);
+    background: rgba(26,8,0,0.5);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--gold);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+
+
+  /* Hero body */
+  .hero-body {
+    position: relative;
+    z-index: 5;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10vw;
+    /* max-width: 680px; */
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(212,150,26,0.55);
+    padding: 0.35rem 1rem;
+    margin-bottom: 2rem;
+    width: fit-content;
+  }
+
+  .hero-h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3.2rem, 7vw, 5.8rem);
+    line-height: 1.04;
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 1.4rem;
+  }
+
+  .hero-h1 em {
+    font-style: italic;
+    color: var(--orange);
+    font-weight: 400;
+  }
+
+  .hero-p {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.75;
+    max-width: 460px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-red {
+    background: var(--red);
+    color: #fff;
+    padding: 1rem 2.4rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .btn-red:hover { background: #a02e14; }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--gold);
+    padding: 1rem 2.4rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(212,150,26,0.55);
+    transition: all 0.2s;
+  }
+  .btn-ghost:hover { background: rgba(212,150,26,0.1); border-color: var(--gold); }
+
+  @keyframes flicker { 0%,100%{opacity:1} 50%{opacity:0.55} }
+
+  /* ── PAGE 2: SOCIAL + FOOTER ── */
+  .page-social {
+    background: var(--dark);
+    padding: 6rem 2rem 5rem;
+    text-align: center;
+  }
+
+  .social-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--red);
+    font-weight: 500;
+    margin-bottom: 0.9rem;
+  }
+
+  .social-h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    color: #fff;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .social-sub {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.4);
+    max-width: 560px;
+    margin: 0 auto 3.5rem;
+    line-height: 1.75;
+  }
+
+  .social-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    max-width: 640px;
+    margin: 0 auto 2.5rem;
+  }
+
+  .social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 1.1rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.13);
+    background: rgba(255,255,255,0.03);
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    transition: all 0.22s;
+  }
+  .social-btn svg { width: 22px; height: 22px; fill: currentColor; flex-shrink: 0; }
+
+  .social-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(212,150,26,0.07); }
+  .social-btn.ig:hover  { border-color: #e1306c; color: #e1306c; background: rgba(225,48,108,0.07); }
+  .social-btn.fb:hover  { border-color: #1877f2; color: #1877f2; background: rgba(24,119,242,0.07); }
+  .social-btn.gm:hover  { border-color: #4285f4; color: #4285f4; background: rgba(66,133,244,0.07); }
+  .social-btn.yp:hover  { border-color: #d32323; color: #d32323; background: rgba(211,35,35,0.07); }
+
+  .social-tag {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.3);
+    margin-top: 0.5rem;
+  }
+  .social-tag strong { color: var(--gold); font-weight: 500; }
+
+  /* Footer strip */
+  .footer-strip {
+    background: #0d0500;
+    border-top: 1px solid rgba(212,150,26,0.15);
+    padding: 1.5rem 2rem;
+    text-align: center;
+  }
+
+  .footer-strip p {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.25);
+    line-height: 1.8;
+  }
+
+  .footer-strip a {
+    color: var(--gold);
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .footer-strip a:hover { opacity: 0.75; }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .hero-body { padding: 0 6vw; }
+    .social-grid { grid-template-columns: 1fr; max-width: 320px; }
+    .hero-badge { right: 5vw; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ PAGE 1 — HERO ══════════════ -->
+<section class="page-hero">
+
+  <!-- Flame line art -->
+  <div class="flame-deco">
+    <svg viewBox="0 0 600 900" preserveAspectRatio="xMidYMid slice">
+      <path d="M80 900 Q140 680 70 460 Q200 560 175 320 Q250 490 230 180 Q300 380 275 60" stroke="#c0391b" stroke-width="1.8" fill="none"/>
+      <path d="M200 900 Q260 640 205 420 Q325 540 300 300 Q370 470 345 140 Q415 360 390 20" stroke="#d4961a" stroke-width="1.2" fill="none"/>
+      <path d="M340 900 Q390 700 350 500 Q455 600 430 390 Q500 530 478 230 Q530 400 520 60" stroke="#c0391b" stroke-width="1" fill="none"/>
+      <path d="M470 900 Q510 740 478 570 Q565 650 548 470 Q595 580 585 330" stroke="#d4961a" stroke-width="0.8" fill="none"/>
+    </svg>
+  </div>
+
+  <!-- Nav -->
+  <nav class="hero-nav">
+    <a href="#" class="nav-logo">🔥 The Flaming Grill</a>
+  </nav>
+
+  <!-- Hero content -->
+  <div class="hero-body">
+    <div class="hero-tag">Indian Fusion · Downtown Denver</div>
+    <h1 class="hero-h1">Where Spice<br/>Meets <em>Soul</em></h1>
+    <p class="hero-p">Bold Indian flavors meet a modern fusion twist. From butter chicken masala to hand-crafted pastries — every dish is an experience.</p>
+    <div class="hero-btns">
+      <a href="https://maps.app.goo.gl/kCobG4HVVPUNnhZU6" target="_blank" class="btn-red">Get Directions</a>
+
+    </div>
+  </div>
+
+
+
+</section>
+
+<!-- ══════════════ PAGE 2 — SOCIAL + FOOTER ══════════════ -->
+<section class="page-social" id="social">
+  <div class="social-label">Stay Connected</div>
+  <h2 class="social-h2">Follow Our Journey</h2>
+  <p class="social-sub">Join our community — new dishes, events, and specials announced on social media first.</p>
+
+  <div class="social-grid">
+
+    <!-- Instagram -->
+    <a href="https://www.instagram.com/theflaminggrillfusion/" target="_blank" class="social-btn ig">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      Instagram
+    </a>
+
+    <!-- Facebook -->
+    <a href="https://www.facebook.com/p/The-Flaming-Grill-Indian-Fusion-61585949336369/" target="_blank" class="social-btn fb">
+      <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      Facebook
+    </a>
+
+    <!-- Google Maps -->
+    <a href="https://maps.app.goo.gl/kCobG4HVVPUNnhZU6" target="_blank" class="social-btn gm">
+      <svg viewBox="0 0 24 24"><path d="M12 0C7.802 0 4 3.403 4 7.602 4 11.8 7.469 16.812 12 24c4.531-7.188 8-12.2 8-16.398C20 3.403 16.199 0 12 0zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+      Google Maps
+    </a>
+
+    <!-- Yelp -->
+    <a href="https://www.yelp.com/biz/the-flaming-grill-denver" target="_blank" class="social-btn yp">
+      <svg viewBox="0 0 24 24"><path d="M20.16 12.73l-4.703 1.14c-.847.21-1.584-.678-1.232-1.486l2.306-5.425c.31-.73 1.288-.73 1.69-.07l2.397 4.285c.414.737-.02 1.663-.458 1.556zm-8.64 6.12l-.435 4.84c-.073.81-.994 1.19-1.59.643L5.86 20.63c-.594-.548-.34-1.527.42-1.71l4.52-1.086c.77-.186 1.457.554 1.32 1.316zm-4.34-10.49l-4.52-1.085C1.94 7.072 1.685 6.09 2.28 5.544L5.924 1.85c.594-.547 1.515-.165 1.59.643l.435 4.84c.137.762-.55 1.502-1.32 1.315zm2.97 3.45L5.65 13.917c-.758.184-1.313-.793-.9-1.53l2.397-4.285c.402-.66 1.38-.66 1.69.07l2.306 5.425c.35.808-.386 1.696-1.233 1.486l.21-.734zm9.31 3.86l-3.643 3.694c-.594.547-1.515.165-1.59-.643l-.435-4.84c-.137-.762.55-1.502 1.32-1.315l4.52 1.085c.76.184 1.014 1.165.42 1.71l-.592.31z"/></svg>
+      Yelp
+    </a>
+
+  </div>
+
+  <p class="social-tag">Tag us <strong>@theflaminggrillfusion</strong> in your posts!</p>
+</section>
+
+<!-- Footer strip -->
+<footer class="footer-strip">
+  <p>© 2026 The Flaming Grill – Indian Fusion · 891 14th St, Denver, CO 80202 · Open Daily 11:30 AM – 10 PM</p>
+  <p><a href="https://www.instagram.com/theflaminggrillfusion/" target="_blank">Instagram</a> · <a href="https://www.facebook.com/p/The-Flaming-Grill-Indian-Fusion-61585949336369/" target="_blank">Facebook</a> · <a href="https://www.yelp.com/biz/the-flaming-grill-denver" target="_blank">Yelp</a></p>
+</footer>
+
+</body>
+</html>
